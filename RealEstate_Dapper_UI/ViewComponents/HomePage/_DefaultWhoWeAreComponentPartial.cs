@@ -16,16 +16,25 @@ namespace RealEstate_Dapper_UI.ViewComponents.HomePage
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
+            var serviceClient = _httpClientFactory.CreateClient();
+
             var responseMessage = await client.GetAsync("https://localhost:7067/api/WhoWeAreDetail");
-            if (responseMessage.IsSuccessStatusCode)
+            var serviceResponseMessage = await client.GetAsync("https://localhost:7067/api/Service");
+
+            if (responseMessage.IsSuccessStatusCode && serviceResponseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var jsonDataService = await serviceResponseMessage.Content.ReadAsStringAsync();
+
                 var value = JsonConvert.DeserializeObject<List<ResultWhoWeAreDetailDTO>>(jsonData);
+                var services = JsonConvert.DeserializeObject<List<ResultServiceDTO>>(jsonDataService);
+
                 ViewBag.title = value.Select(x => x.Title).FirstOrDefault();
                 ViewBag.subTitle = value.Select(x => x.SubTitle).FirstOrDefault();
                 ViewBag.description = value.Select(x => x.Description).FirstOrDefault();
                 ViewBag.subDescription = value.Select(x => x.SubDescription).FirstOrDefault();
-                return View();
+
+                return View(services);
             }
             return View();
         }
