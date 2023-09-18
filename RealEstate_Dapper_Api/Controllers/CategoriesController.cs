@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RealEstate_Dapper_Api.Dtos.CategoryDtos;
 using RealEstate_Dapper_Api.Repositories.CategoryRepository;
 
@@ -29,8 +28,8 @@ namespace RealEstate_Dapper_Api.Controllers
              _categoryRepository.CreateCategory(createCategoryDto);
             return Ok("Kategori Başarılı Bir Şekilde Eklendi");
         }
-        
-        [HttpDelete]
+
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             _categoryRepository.DeleteCategory(id);
