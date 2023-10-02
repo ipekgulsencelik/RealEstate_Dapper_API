@@ -7,6 +7,7 @@ namespace RealEstate_Dapper_Api.Repositories.CategoryRepository
     public class CategoryRepository : ICategoryRepository
     {
         private readonly Context _context;
+
         public CategoryRepository(Context context)
         {
             _context = context;
