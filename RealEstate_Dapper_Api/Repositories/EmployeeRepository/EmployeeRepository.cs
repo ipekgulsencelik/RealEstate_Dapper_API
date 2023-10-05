@@ -21,7 +21,7 @@ namespace RealEstate_Dapper_API.Repositories.EmployeeRepository
             parameters.Add("@title", createEmployeeDTO.Title);
             parameters.Add("@mail", createEmployeeDTO.Mail);
             parameters.Add("@phoneNumber", createEmployeeDTO.PhoneNumber);
-            parameters.Add("@imageURL", createEmployeeDTO.PhoneNumber);
+            parameters.Add("@imageURL", createEmployeeDTO.ImageURL);
             parameters.Add("@status", true);
             using (var connection = _context.CreateConnection())
             {
@@ -70,7 +70,7 @@ namespace RealEstate_Dapper_API.Repositories.EmployeeRepository
             parameters.Add("@title", updateEmployeeDTO.Title);
             parameters.Add("@mail", updateEmployeeDTO.Mail);
             parameters.Add("@phoneNumber", updateEmployeeDTO.PhoneNumber);
-            parameters.Add("@imageURL", updateEmployeeDTO.PhoneNumber);
+            parameters.Add("@imageURL", updateEmployeeDTO.ImageURL);
             parameters.Add("@status", true);
             parameters.Add("@employeeID", updateEmployeeDTO.EmployeeID);
             using (var connection = _context.CreateConnection())
