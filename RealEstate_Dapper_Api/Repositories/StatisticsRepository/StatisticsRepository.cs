@@ -44,7 +44,8 @@ namespace RealEstate_Dapper_API.Repositories.StatisticsRepository
 
         public decimal AverageProductPriceByRent()
         {
-            string query = "Select Avg(Price) From Products where Type='Kiralık'";
+            // string query = "Select Avg(Price) From Products where Type='Kiralık'";
+            string query = "Select Top(1) Avg(Price) From Products Group By Type";
             using (var connection = _context.CreateConnection())
             {
                 var values = connection.QueryFirstOrDefault<decimal>(query);
@@ -54,7 +55,8 @@ namespace RealEstate_Dapper_API.Repositories.StatisticsRepository
 
         public decimal AverageProductPriceBySale()
         {
-            string query = "Select Avg(Price) From Products where Type='Satılık'";
+            // string query = "Select Avg(Price) From Products where Type='Satılık'";
+            string query = "Select Top(1) Avg(Price) From Products Group By Type Order By Avg(Price) Desc";
             using (var connection = _context.CreateConnection())
             {
                 var values = connection.QueryFirstOrDefault<decimal>(query);
@@ -64,7 +66,7 @@ namespace RealEstate_Dapper_API.Repositories.StatisticsRepository
 
         public int AverageRoomCount()
         {
-            string query = "select AVG(RoomCount) from ProductDetails";
+            string query = "Select AVG(RoomCount) From ProductDetails";
             using (var connection = _context.CreateConnection())
             {
                 var values = connection.QueryFirstOrDefault<int>(query);
