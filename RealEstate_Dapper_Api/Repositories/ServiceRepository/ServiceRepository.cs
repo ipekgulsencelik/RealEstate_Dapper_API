@@ -13,17 +13,30 @@ namespace RealEstate_Dapper_API.Repositories.ServiceRepository
             _context = context;
         }
 
-        public void CreateService(CreateServiceDTO createServiceDTO)
+        public async void CreateService(CreateServiceDTO createServiceDTO)
         {
-            throw new NotImplementedException();
+            string query = "Insert Into Services (ServiceName,ServiceStatus) values (@serviceName,@serviceStatus)";
+            var parameters = new DynamicParameters();
+            parameters.Add("@serviceName", createServiceDTO.ServiceName);
+            parameters.Add("@serviceStatus", true);
+            using (var connection = _context.CreateConnection())
+            {
+                await connection.ExecuteAsync(query, parameters);
+            }
         }
 
-        public void DeleteService(int id)
+        public async void DeleteService(int id)
         {
-            throw new NotImplementedException();
+            string query = "Delete From Services Where ServiceID=@serviceID";
+            var parameters = new DynamicParameters();
+            parameters.Add("@serviceID", id);
+            using (var connection = _context.CreateConnection())
+            {
+                await connection.ExecuteAsync(query, parameters);
+            }
         }
 
-        public async Task<List<ResultServiceDTO>> GetAllServiceAsync()
+        public async Task<List<ResultServiceDTO>> GetAllService()
         {
             string query = "Select * From Services";
             using (var connection = _context.CreateConnection())
@@ -33,14 +46,29 @@ namespace RealEstate_Dapper_API.Repositories.ServiceRepository
             }
         }
 
-        public Task<GetByIDServiceDTO> GetService(int id)
+        public async Task<GetByIDServiceDTO> GetService(int id)
         {
-            throw new NotImplementedException();
+            string query = "Select * From Services Where ServiceID=@serviceID";
+            var parameters = new DynamicParameters();
+            parameters.Add("@serviceID", id);
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryFirstOrDefaultAsync<GetByIDServiceDTO>(query, parameters);
+                return values;
+            }
         }
 
-        public void UpdateService(UpdateServiceDTO updateServiceDTO)
+        public async void UpdateService(UpdateServiceDTO updateServiceDTO)
         {
-            throw new NotImplementedException();
+            string query = "Update Services Set ServiceName=@serviceName,ServiceStatus=@serviceStatus Where ServiceID=@serviceID";
+            var parameters = new DynamicParameters();
+            parameters.Add("@serviceName", updateServiceDTO.ServiceName);
+            parameters.Add("@serviceStatus", updateServiceDTO.ServiceStatus);
+            parameters.Add("@serviceID", updateServiceDTO.ServiceID);
+            using (var connectiont = _context.CreateConnection())
+            {
+                await connectiont.ExecuteAsync(query, parameters);
+            }
         }
     }
 }
