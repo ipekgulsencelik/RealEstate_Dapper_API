@@ -6,6 +6,9 @@
     int count = 0;
 }
 
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-12">
@@ -27,8 +30,10 @@
                                 count++;
                                 <tr>
                                     <th scope="row">@count</th>
-                                    <td><img src="@item.ImageURL" /> @item.CityName</td>
-                                    <td><a href="/PopularLocation/DeletePopularLocation/@item.LocationID" class="btn btn-outline-danger">Sil</a></td>
+                                    <td> <img src="@item.ImageURL" style="border-radius: 50%; height: 50px; width: 50px" /> @item.CityName</td>
+                                    <td>
+                                        <button onclick="deleteLocation(@item.LocationID)" type="submit" class="btn btn-outline-danger">Sil</button>
+                                    </td>
                                     <td><a href="/PopularLocation/UpdatePopularLocation/@item.LocationID" class="btn btn-outline-success">Güncelle</a></td>
                                 </tr>
                             }
@@ -40,3 +45,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    function deleteLocation(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/PopularLocation/DeletePopularLocation?id=" + id;
+            }
+        });
+    }
+</script>

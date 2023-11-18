@@ -23,6 +23,7 @@
                                 <th scope="col">Kategori</th>
                                 <th scope="col">Fiyat</th>
                                 <th scope="col">Tür</th>
+                                <th scope="col">Günün Fırsatı</th>
                                 <th scope="col">Sil</th>
                                 <th scope="col">Güncelle</th>
                                 <th scope="col">Sitede Gör</th>
@@ -40,9 +41,19 @@
                                     <td>@item.CategoryName</td>
                                     <td>@item.Price</td>
                                     <td>@item.Type</td>
+                                    <td>
+                                        @if (item.DealOfTheDay == true)
+                                        {
+                                            <a href="/Product/ProductDetail/@item.ProductID" class="btn btn-outline-secondary">Pasif Yap</a>
+                                        }
+                                        @if (item.DealOfTheDay == false)
+                                        {
+                                            <a href="/Product/ProductDetail/@item.ProductID" class="btn btn-outline-warning">Aktif Yap</a>
+                                        }
+                                    </td>
                                     <td><a href="/Product/DeleteProduct/@item.ProductID" class="btn btn-outline-danger">Sil</a></td>
                                     <td><a href="/Product/UpdateProduct/@item.ProductID" class="btn btn-outline-success">Güncelle</a></td>
-                                    <td><a href="/Product/ProductDetail/@item.ProductID" class="btn btn-outline-primary">Sitede Gör</a></td>
+                                    <td><a href="/Product/ProductDetail/@item.ProductID" class="btn btn-outline-warning">Sitede Gör</a></td>
                                 </tr>
                             }
                         </tbody>
@@ -53,4 +64,3 @@
         </div>
     </div>
 </div>
-
