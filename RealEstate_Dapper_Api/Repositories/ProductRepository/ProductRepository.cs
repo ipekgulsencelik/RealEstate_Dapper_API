@@ -13,22 +13,32 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             _context = context;
         }
         
-        public async Task<List<ResultProductDto>> GetAllProductAsync()
+        public async Task<List<ResultProductDTO>> GetAllProductAsync()
         {
             string query = "Select * From Products";
             using (var connection = _context.CreateConnection())
             {
-                var values = await connection.QueryAsync<ResultProductDto>(query);
+                var values = await connection.QueryAsync<ResultProductDTO>(query);
                 return values.ToList();
             }
         }
 
-        public async Task<List<ResultProductWithCategoryDto>> GetAllProductWithCategoryAsync()
+        public async Task<List<ResultProductWithCategoryDTO>> GetAllProductWithCategoryAsync()
         {
             string query = "Select ProductID,Title,Price,City,District,CategoryName,CoverImage,Type,Address, DealOfTheDay From Products inner join Category on Products.ProductCategory=Category.CategoryID";
             using (var connection = _context.CreateConnection())
             {
-                var values = await connection.QueryAsync<ResultProductWithCategoryDto>(query);
+                var values = await connection.QueryAsync<ResultProductWithCategoryDTO>(query);
+                return values.ToList();
+            }
+        }
+
+        public async Task<List<ResultProductDTO>> GetLast5ProductAsync()
+        {
+            string query = "Select Top(5) * From Products Where Type='Kiralık' Order By ProductID Desc";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultProductDTO>(query);
                 return values.ToList();
             }
         }

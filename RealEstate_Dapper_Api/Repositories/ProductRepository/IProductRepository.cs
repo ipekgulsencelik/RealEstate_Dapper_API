@@ -4,9 +4,10 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
 {
     public interface IProductRepository
     {
-        Task<List<ResultProductDto>> GetAllProductAsync();
-        Task<List<ResultProductWithCategoryDto>> GetAllProductWithCategoryAsync();
+        Task<List<ResultProductDTO>> GetAllProductAsync();
+        Task<List<ResultProductWithCategoryDTO>> GetAllProductWithCategoryAsync();
         void ProductDealOfTheDayStatusChangeToTrue(int id);
         void ProductDealOfTheDayStatusChangeToFalse(int id);
+        Task<List<ResultProductDTO>> GetLast5ProductAsync();
     }
 }
