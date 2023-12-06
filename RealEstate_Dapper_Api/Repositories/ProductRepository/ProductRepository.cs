@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using RealEstate_Dapper_Api.Dtos.ProductDtos;
 using RealEstate_Dapper_Api.Models.DapperContext;
+using RealEstate_Dapper_API.DTOs.ProductDTOs;
 
 namespace RealEstate_Dapper_Api.Repositories.ProductRepository
 {
@@ -12,7 +13,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
         {
             _context = context;
         }
-        
+
         public async Task<List<ResultProductDTO>> GetAllProductAsync()
         {
             string query = "Select * From Products";
@@ -29,16 +30,6 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             using (var connection = _context.CreateConnection())
             {
                 var values = await connection.QueryAsync<ResultProductWithCategoryDTO>(query);
-                return values.ToList();
-            }
-        }
-
-        public async Task<List<ResultProductDTO>> GetLast5ProductAsync()
-        {
-            string query = "Select Top(5) * From Products Where Type='Kiralık' Order By ProductID Desc";
-            using (var connection = _context.CreateConnection())
-            {
-                var values = await connection.QueryAsync<ResultProductDTO>(query);
                 return values.ToList();
             }
         }
@@ -62,6 +53,16 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             using (var connection = _context.CreateConnection())
             {
                 await connection.ExecuteAsync(query, parameters);
+            }
+        }
+
+        public async Task<List<ResultLast5ProductWithCategoryDTO>> GetLast5ProductAsync()
+        {
+            string query = "Select Top(5) ProductID,Title,Price,City,District,ProductCategory,CategoryName,AdvertisementDate From Product Inner Join Category On Product.ProductCategory=Category.CategoryID Where Type='Kiralık' Order By ProductID Desc";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultLast5ProductWithCategoryDTO>(query);
+                return values.ToList();
             }
         }
     }
