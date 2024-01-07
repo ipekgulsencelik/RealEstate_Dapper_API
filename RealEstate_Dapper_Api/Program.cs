@@ -64,6 +64,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHub<SignalRHub>("/signalrhub");
+app.MapHub<SignalRHub>("/SignalRHub");
 
 app.Run();
