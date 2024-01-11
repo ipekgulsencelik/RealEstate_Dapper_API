@@ -40,6 +40,9 @@ builder.Services.AddCors(opt =>
 			   .AllowCredentials();
 	});
 });
+
+builder.Services.AddHttpClient();
+
 builder.Services.AddSignalR();
 
 builder.Services.AddControllers();
