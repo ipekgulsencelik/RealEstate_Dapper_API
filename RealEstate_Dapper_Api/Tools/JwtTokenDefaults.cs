@@ -1,6 +1,6 @@
 ﻿namespace RealEstate_Dapper_API.Tools
 {
-    public class JWT
+    public class JwtTokenDefaults
     {
         public const string ValidAudience = "https://localhost";
         public const string ValidIssuer = "https://localhost";
