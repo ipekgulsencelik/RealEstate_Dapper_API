@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RealEstate_Dapper_UI.DTOs.EmployeeDTOs;
+using RealEstate_Dapper_UI.Services;
 using System.Text;
 
 namespace RealEstate_Dapper_UI.Controllers
@@ -10,15 +11,20 @@ namespace RealEstate_Dapper_UI.Controllers
     public class EmployeeController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        
-        public EmployeeController(IHttpClientFactory httpClientFactory)
+        private readonly ILoginService _loginService;
+
+        public EmployeeController(IHttpClientFactory httpClientFactory, ILoginService loginService)
         {
             _httpClientFactory = httpClientFactory;
+            _loginService = loginService;
         }
         
         public async Task<IActionResult> Index()
         {
-			var token = User.Claims.FirstOrDefault(x => x.Type == "realestatetoken")?.Value;
+            var user = User.Claims;
+            var userID = _loginService.GetUserID;
+
+            var token = User.Claims.FirstOrDefault(x => x.Type == "realestatetoken")?.Value;
             if (token != null)
             {
                 var client = _httpClientFactory.CreateClient();
