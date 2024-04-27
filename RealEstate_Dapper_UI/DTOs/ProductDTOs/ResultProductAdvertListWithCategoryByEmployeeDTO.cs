@@ -1,6 +1,6 @@
-﻿namespace RealEstate_Dapper_API.DTOs.ProductDTOs
+﻿namespace RealEstate_Dapper_UI.DTOs.ProductDTOs
 {
-    public class ResultGetProductAdvertListWithCategoryByEmployeeDTO
+    public class ResultProductAdvertListWithCategoryByEmployeeDTO
     {
         public int ProductID { get; set; }
         public string Title { get; set; }
