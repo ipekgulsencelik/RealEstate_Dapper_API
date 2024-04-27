@@ -15,7 +15,7 @@ namespace RealEstate_Dapper_API.Repositories.MessageRepositories
 
         public async Task<List<ResultInoxMessageDTO>> GetInBoxLast3MessageListByReceive(int id)
         {
-            string query = "Select Top(3) * From Messages Where Receiver=@receiverID Order By MessageID Desc";
+            string query = "Select Top(3) MessageID, Name, Subject, Detail, SendDate, IsRead, UserImageURL From Message Inner Join AppUser On Message.Sender=AppUser.UserID Where Receiver=@receiverID Order By MessageID Desc";
             var parameters = new DynamicParameters();
             parameters.Add("@receiverID", id);
             using (var connection = _context.CreateConnection())
