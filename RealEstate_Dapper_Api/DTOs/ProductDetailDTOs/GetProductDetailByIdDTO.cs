@@ -12,5 +12,6 @@
         public string Location { get; set; }
         public string VideoURL { get; set; }
         public int ProductID { get; set; }
+        public DateTime AdvertisementDate { get; set; }
     }
 }
