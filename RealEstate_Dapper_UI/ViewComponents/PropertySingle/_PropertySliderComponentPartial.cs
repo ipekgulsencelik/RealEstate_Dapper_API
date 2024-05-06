@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RealEstate_Dapper_UI.DTOs.ProductDTOs;
+using RealEstate_Dapper_UI.DTOs.ProductImageDTOs;
 
-namespace RealEstate_Dapper_UI.ViewComponents.Dashboard
+namespace RealEstate_Dapper_UI.ViewComponents.PropertySingle
 {
-    public class _DashboardLast5ProductComponentPartial : ViewComponent
+    public class _PropertySliderComponentPartial : ViewComponent
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public _DashboardLast5ProductComponentPartial(IHttpClientFactory httpClientFactory)
+        public _PropertySliderComponentPartial(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -16,11 +16,11 @@ namespace RealEstate_Dapper_UI.ViewComponents.Dashboard
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7067/api/Products/Last5ProductList");
+            var responseMessage = await client.GetAsync("https://localhost:7067/api/ProductImages?id=1");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultLast5ProductWithCategoryDTO>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultProductImageDTO>>(jsonData);
 
                 return View(values);
             }
