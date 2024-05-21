@@ -59,6 +59,8 @@ namespace RealEstate_Dapper_UI.Controllers
             ViewBag.size = values.ProductSize;
             ViewBag.buildYear = values.BuildYear;
             ViewBag.date = values.AdvertisementDate;
+            ViewBag.location = values.Location;
+            ViewBag.videoURL = values.VideoURL;
 
             DateTime currentDate = DateTime.Now;
             DateTime advertisementDate = product.AdvertisementDate;
