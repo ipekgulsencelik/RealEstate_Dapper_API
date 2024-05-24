@@ -4,7 +4,7 @@ using RealEstate_Dapper_UI.DTOs.AmenityPropertyDTOs;
 
 namespace RealEstate_Dapper_UI.ViewComponents.PropertySingle
 {
-    public class _PropertyAmenityTrueStatusByPropertyIdComponentsPartial : ViewComponents
+    public class _PropertyAmenityTrueStatusByPropertyIdComponentsPartial : ViewComponent
     {
         private readonly IHttpClientFactory _httpClientFactory;
 

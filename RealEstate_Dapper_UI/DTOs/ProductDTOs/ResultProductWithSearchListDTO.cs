@@ -1,4 +1,4 @@
-﻿namespace RealEstate_Dapper_API.DTOs.ProductDTOs
+﻿namespace RealEstate_Dapper_UI.DTOs.ProductDTOs
 {
     public class ResultProductWithSearchListDTO
     {
