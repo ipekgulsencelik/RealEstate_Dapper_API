@@ -151,5 +151,15 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
                 return values.ToList();
             }
         }
+
+        public async Task<List<ResultProductWithCategoryDTO>> GetProductByDealOfTheTrueDayWithCategoryAsync()
+        {
+            string query = "Select ProductID, Title, Price, City, District, CategoryName, CoverImage, Type, Address, DealOfTheDay From Products inner join Category on Products.ProductCategory=Category.CategoryID Where DealOfTheDay=1";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultProductWithCategoryDTO>(query);
+                return values.ToList();
+            }
+        }
     }
 }
